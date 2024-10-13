@@ -56,4 +56,8 @@ public class PriorityQ<T> {
     public boolean isFull() {
         return nItems==maxSize;
     }
+
+    public int size() {
+        return nItems;
+    }
 }
