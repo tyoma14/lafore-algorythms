@@ -54,6 +54,24 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         }
     }
 
+    public void displayTree() {
+        displayTree(root);
+    }
+
+    private void displayTree(Node<K, V> node) {
+        Node<K, V> left = node.leftChild;
+        if (left != null) {
+            displayTree(left);
+        }
+
+        System.out.print(node.getKey() + " ");
+
+        Node<K, V> right = node.rightChild;
+        if (right != null) {
+            displayTree(right);
+        }
+    }
+
     private void inOrder(Node<K, V> localRoot) {
         if (localRoot != null) {
             inOrder(localRoot.leftChild);
