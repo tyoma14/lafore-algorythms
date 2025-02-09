@@ -112,6 +112,41 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         return successor;
     }
 
+    public Node<K, V> removeMax() {
+        Node<K, V> prev = null;
+        Node<K, V> current = root;
+        Node<K, V> next = root.rightChild;
+        while (next != null) {
+            prev = current;
+            current = next;
+            next = next.rightChild;
+        }
+        if (prev != null) {
+            prev.rightChild = current.leftChild;
+            return current;
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+
+    public void displayTreeReversed() {
+        displayTreeReversed(root);
+    }
+
+    private void displayTreeReversed(Node<K, V> node) {
+        Node<K, V> right = node.rightChild;
+        if (right != null) {
+            displayTreeReversed(right);
+        }
+
+        System.out.print(node.getKey() + " ");
+
+        Node<K, V> left = node.leftChild;
+        if (left != null) {
+            displayTreeReversed(left);
+        }
+    }
+
     public static class Node<K, V> {
 
         K key;
