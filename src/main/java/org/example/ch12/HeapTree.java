@@ -101,13 +101,13 @@ public class HeapTree {
     private void check(Node node) {
         Node left = node.left;
         if (left != null) {
-            assert node.getKey() > left.getKey() : "Parent " + node.getKey() + " later than left child " + left.getKey();
+            assert node.getKey() > left.getKey() : "Parent " + node.getKey() + " less than left child " + left.getKey();
             check(left);
         }
 
         Node right = node.right;
         if (right !=null) {
-            assert node.getKey() > right.getKey() : "Parent " + node.getKey() + " later than right child " + right.getKey();
+            assert node.getKey() > right.getKey() : "Parent " + node.getKey() + " less than right child " + right.getKey();
             check(right);
         }
     }
