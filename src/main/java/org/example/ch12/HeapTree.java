@@ -15,18 +15,8 @@ public class HeapTree {
             root = newNode;
             retVal = newNode;
         } else {
-            Node parent = root;
-            int n = count + 1;
-            String bits = bitsOf(n);
-            int i = bits.length() - 2;
-            for (; i > 0; i--) {
-                if (bits.charAt(i) == '0') {
-                    parent = parent.left;
-                } else {
-                    parent = parent.right;
-                }
-            }
-            if (bits.charAt(i) == '0') {
+            Node parent = findByNum((count + 1) / 2);
+            if (parent.left == null) {
                 parent.attachLeft(newNode);
             } else {
                 parent.attachRight(newNode);
@@ -37,14 +27,18 @@ public class HeapTree {
         check();
         return retVal;
     }
-
-    private String bitsOf(int n) {
-        String bits = "";
-        while (n >= 1) {
-            bits = bits.concat(String.valueOf((n % 2)));
-            n /= 2;
+    
+    public Node findByNum(int num) {
+        if (num == 1) {
+            return root;
+        } else {
+            Node node = findByNum(num / 2);
+            if (num % 2 == 0) {
+                return node.left;
+            } else {
+                return node.right;
+            }
         }
-        return bits;
     }
 
     private Node trickleUp(Node node) {
@@ -65,16 +59,7 @@ public class HeapTree {
         if (count == 1) {
             root = null;
         } else {
-            Node last = root;
-            String bits = bitsOf(count);
-            int i = bits.length() - 2;
-            for (; i >= 0; i--) {
-                if (bits.charAt(i) == '0') {
-                    last = last.left;
-                } else {
-                    last = last.right;
-                }
-            }
+            Node last = findByNum(count);
             last.detach();
             root.setKey(last.getKey());
             trickleDown(root);
@@ -169,7 +154,7 @@ public class HeapTree {
             }
         }
 
-        public void detach() {
+        void detach() {
             if (parent.left == this) {
                 parent.left = null;
             } else if (parent.right == this) {

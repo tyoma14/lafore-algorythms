@@ -21,6 +21,13 @@ class HeapTreeTest {
         heapTree.insert(10);
         heapTree.insert(90);
 
+        assertEquals(100, heapTree.findByNum(1).getKey());
+        assertEquals(90, heapTree.findByNum(2).getKey());
+        assertEquals(80, heapTree.findByNum(3).getKey());
+        assertEquals(30, heapTree.findByNum(4).getKey());
+        assertEquals(60, heapTree.findByNum(5).getKey());
+        assertEquals(40, heapTree.findByNum(10).getKey());
+
         assertEquals(100, heapTree.remove());
         assertEquals(90, heapTree.remove());
         assertEquals(80, heapTree.remove());
